@@ -1,0 +1,136 @@
+/* pages/login/login.wxss */
+page {
+  margin: 0;
+  padding: 0;
+  background:rgba(250,250,250,1);
+}
+view {
+  margin: 0;
+  padding: 0;
+}
+
+.switch-container {
+  width: 100%;
+  margin-top: 80rpx;
+}
+.switch-container::after, .switch-container>view::after, .iden-container::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.switch-container>view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50rpx;
+  float: left;
+  width: 100rpx;
+}
+.switch-container>view>text {
+  width:88rpx;
+  height:44rpx;
+  font-size:44rpx;
+  font-family:PingFangHK-Medium;
+  font-weight:500;
+  color:rgba(42,42,42,1);
+  line-height:44rpx;
+}
+.switch-bottom {
+  width: 100%;
+  margin-top: 20rpx;
+  height: 10rpx;
+}
+.switch-bottom>view {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50rpx;
+  float: left;
+  width: 100rpx;
+  height: 10rpx;
+}
+.switch-bottom>view>view {
+  width: 52rpx;
+  height: 10rpx;
+  background-color: #2A2A2A;
+}
+.button-container>button {
+  width: 626rpx;
+  font-size:36rpx;
+  font-family:PingFangHK-Medium;
+  font-weight:500;
+  border-radius: 0!important;
+}
+.login-mode-container {
+  margin-top: 48rpx;
+}
+.login-mode-container>button {
+  border: 1px solid;
+  height:92rpx;
+}
+.certain {
+  margin-top: 74rpx;
+  height:92rpx;
+  background:rgba(42,42,42,1);
+  color:rgba(254,254,254,1);
+}
+.input-container>view input {
+  width: 622rpx;
+  margin: 50rpx auto;
+  height: 80rpx;
+  font-size:28rpx;
+  font-family:PingFangHK-Medium;
+  font-weight:500;
+  color:rgba(42,42,42,1);
+  line-height:28rpx;
+  border-bottom: 1px solid;
+}
+.iden-input {
+  width: 446rpx!important;
+  margin-top: 0!important;
+  margin-bottom: 0!important;
+}
+.iden-container {
+  position: relative;
+  overflow: hidden;
+  width: 622rpx;
+  margin: 0 auto;
+}
+.iden-container>input, .iden-container>view, .iden-container>text {
+  float: left;
+}
+.iden-container>view {
+  width: 174rpx;
+  height: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid;
+}
+.iden-container>view>text {
+  display: block;
+  width:140rpx;
+  height:28rpx;
+  font-size:28rpx;
+  font-family:PingFangHK-Medium;
+  font-weight:500;
+  color:rgba(42,42,42,1);
+  line-height:28rpx;
+  text-align: center;
+}
+.iden-line {
+  position: absolute;
+  display: block;
+  width: 1px;
+  height: 60rpx;
+  background-color: #2A2A2A;
+  top: 10rpx;
+  right: 190rpx;
+}
+.active {
+  display: block;
+}
+.normal {
+  display: none;
+}

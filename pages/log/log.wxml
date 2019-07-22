@@ -1,0 +1,16 @@
+<!--pages/log/log.wxml-->
+  <text class='title'>查看日志</text>
+  <view class='head-container'>
+    <text>设备名称</text>
+    <text>操作时间</text>
+    <text>操作原因</text>
+  </view>
+  <view class="line"></view>
+  <view class='info-container' wx:for="{{ logs }}">
+    <text>{{ item.deviceName }}</text>
+    <view class='time-container'>
+      <text>{{ item.deviceTime[0] }}</text>
+      <text>{{ item.deviceTime[1] }}</text>
+    </view>
+    <text>{{ item.deviceReason }}</text>
+  </view>

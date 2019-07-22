@@ -1,0 +1,3 @@
+<!--pages/socket1/socket1.wxml-->
+<!-- <text>pages/socket1/socket1.wxml</text> -->
+<include src="../pageIndex/pageIndex.wxml"/>

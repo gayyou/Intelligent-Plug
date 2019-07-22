@@ -1,0 +1,51 @@
+<!--pages/login/login.wxml-->
+<view>
+  <view class="switch-container" bindtap="switchMode">
+    <view>
+      <text data-id='1'>登录</text>
+    </view>
+    <view>
+      <text data-id='2'>注册</text>
+    </view>
+  </view>
+  <view class="switch-bottom">
+    <view><view class="{{mode.login? 'active' : 'normal' }}"></view></view>
+    <view><view class="{{mode.regist? 'active' : 'normal' }}"></view></view>
+  </view>
+  <!-- 以下是登陆模块 -->
+  <view class="{{mode.login? 'active' : 'normal' }}">
+    <view class="{{login.phoneMode.active? 'active' : 'normal' }}">
+      <view class="input-container">
+        <view><input placeholder="手机号" maxlength='11' type='number' data-name="account" bindinput="consoles" data-mode='1' bindinput='setFromData'></input></view>
+        <view>
+        <view class="iden-container"><input class="iden-input" maxlength='6' data-name="code" data-mode='1' bindinput='setFromData' type='number' placeholder="验证码"></input><text class="iden-line"></text><view><text class="idenCode" bindtap="getIdenCode" data-mode="1">{{ login.phoneMode.codeMes }}</text></view></view>
+        </view>
+      </view>
+      <view class="button-container"><button class="certain" bindtap="submitCodeLogin">确定</button></view>
+      <view class="button-container login-mode-container"><button bindtap="switchLoginMode" data-mode='1'>密码登陆</button></view>
+    </view>
+    <view class="{{login.passwordMode.active? 'active' : 'normal' }}">
+      <view class="input-container">
+        <view><input placeholder="手机号" data-mode='2' type='number' maxlength='11' data-name="account" bindinput='setFromData'></input></view>
+        <view>
+        <view><input placeholder="密码" data-mode='2' password='true' maxlength='18' data-name="password" bindinput='setFromData'></input></view>
+        </view>
+      </view>
+      <view class="button-container"><button class="certain" bindtap="submitPasswordLogin">确定</button></view>
+      <view class="button-container login-mode-container"><button bindtap="switchLoginMode" data-mode='2'>手机登录</button></view>
+    </view>
+  </view>
+  <!-- 以下是注册模块 -->
+  <view class="{{mode.regist? 'active' : 'normal' }}">
+      <view class="input-container">
+        <view><input placeholder="手机号" type='number' data-name="account" maxlength='11' data-mode='3' bindinput='setFromData'></input></view>
+        <view>
+        <view>
+        <view><input placeholder="密码" data-name="password" password='true' maxlength='18' data-mode='3' bindinput='setFromData'></input></view>
+        </view>
+        <view class="iden-container"><input class="iden-input" data-mode='3' type='number' placeholder="验证码" data-name="code" bindinput='setFromData'></input><text class="iden-line"></text><view><text class="idenCode" bindtap="getIdenCode" data-mode="2">{{regist.codeMes}}</text></view></view>
+        </view>
+      </view>
+      <view class="button-container"><button class="certain" bindtap="submitRegist">确定</button></view>
+  </view>
+</view>

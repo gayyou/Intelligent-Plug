@@ -1,0 +1,72 @@
+/* pages/option/option.wxss */
+@import '../changeInfo/changeInfo.wxss';
+
+.delete-button {
+  position: absolute;
+  display: block;
+  width: 484rpx;
+  height: 76rpx;
+  bottom: 55rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity:0.9;
+  border:1px solid #ED012E;
+  border-radius: 0;
+  font-size:36rpx;
+  font-family:PingFangHK-Medium;
+  font-weight:500;
+  color:rgba(237,1,46,1);
+  line-height:72rpx;
+}
+.change-container {
+  height: 680rpx!important;
+}
+.input-container>input {
+  display:block;
+  float:left;
+  width:326rpx!important;
+  margin-left:48rpx;
+  font-size:28rpx;
+  font-family:PingFangHK-Medium;
+  font-weight:500;
+  color:rgba(42,42,42,1);
+  line-height:28rpx;
+}
+.input-container>text {
+  display:block;
+  float:left;
+  width:auto;
+  height:28rpx;
+  font-size:28rpx;
+  font-family:PingFangHK-Medium;
+  font-weight:500;
+  color:rgba(42,42,42,1);
+  line-height:28rpx;
+}
+.option-input {
+  margin-left: 108rpx!important;
+}
+.option-switch {
+  float: right;
+  margin-left: 100rpx;
+  margin-right: 40rpx;
+  width: 66rpx;
+  height: 40rpx;
+  background:rgba(6,24,87,1);
+  border-radius:32rpx;
+}
+.option-switch>view {
+  cursor: pointer;
+  width:20px;
+  height:20px;
+  background:rgba(255,255,255,1);
+  border-radius: 50%;
+  transition: transform .5s ease;
+}
+
+.power-active {
+  transform: translateX(26rpx);
+}
+.power-normal {
+  transform: translateX(0rpx);
+}

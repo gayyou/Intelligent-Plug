@@ -1,0 +1,88 @@
+<view class="body">
+  <view class="header-container">
+    <view class="left-section">
+      <view class="info-container">
+        <text class="socket">接口</text>
+        <text class="name">{{ indexName }}</text>
+        <!-- <image class="change-name" src="../../images/icons/icon_Name_Edit@3x.png"></image> -->
+        <!-- <input class="input-info" type="text"></input> -->
+      </view>
+      <view class="status-container">
+        <text>状态:</text>
+        <text class="status">{{ applianceStatus }}</text>
+      </view>
+    </view>
+    <view class="right-section">
+      <view class="{{ statusActive }}" bindtap="switchStatus" data-status="{{ status }}">
+        <view class="switch-controll {{ switchTranstion }}"></view>
+      </view>
+    </view>
+  </view>
+  <view class="main">
+    <view class="switch-mode-container" bindtap="switchMode">
+      <view wx:for="{{ modeArray }}" class="{{ item.className }}" data-id="{{ index }}">
+        {{ item.name }}
+      </view>
+    </view>
+    <view class="data-show">
+      <view class="current-data-container" style="{{ mainArr[0].style }}">
+        <button class="current-switch-mode" bindtap="changeCurrentMode">{{ currentDataMode }}</button>
+        <view class="current-echarts-container">
+          <ec-canvas id="current-charts" ec="{{ currentEc }}"></ec-canvas>
+        </view>
+      </view>
+      <view class="search-data-container" style="{{ mainArr[1].style }}">
+        <view class="search-choice-container">
+          <text class="predict-button" bindtap="predictPower">预测当天</text>
+          <view class="choice-select" bindtap="changeMode">
+            <text>{{ timeChoiceMode }}</text>
+          </view>
+          <view class="time-select" bindtap="choiceTime" data-mode="{{ timeMode }}">{{ choicedTime }}</view>
+          <image class="search-label" src="../../images/icons/icon_TimeSearch_Search@3x.png" bindtap="searchButton"></image>
+        </view>
+        <view class="echart-container {{ chartsShow }}">
+          <ec-canvas id="powerEchart" canvas-id="mychart" ec="{{ powerEc }}"></ec-canvas>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 选择框浮出层 -->
+<view class='picker-layer-container' style="{{ layerStyle }}">
+  <view class='choice-area'>
+  <view class='button-container' bindtap="timeChoiced">
+    <text class="layer-button button-left" data-id="cancel">取消</text>
+    <text class="layer-button button-right" data-id="comfirm">确定</text>
+  </view>
+  <picker-view class="picker" style="{{ layerSelectArr[0].style }}" indicator-class="indicator" value="{{value}}" bindchange="bindChangeDate">
+    <picker-view-column class="column">
+      <view wx:for="{{years}}">{{item}}年</view>
+    </picker-view-column>
+
+    <picker-view-column class="column">
+      <view wx:for="{{months}}">{{item}}月</view>
+    </picker-view-column>
+
+    <picker-view-column class="column">
+      <view wx:for="{{days}}">{{item}}日</view>
+    </picker-view-column>
+    
+  </picker-view>
+  <!-- 选择月份 -->
+  <picker-view class="picker" style="{{ layerSelectArr[1].style }}" indicator-class="indicator" value="{{value}}" bindchange="bindChangeMonth">
+    <picker-view-column class="column">
+      <view wx:for="{{years}}">{{item}}年</view>
+    </picker-view-column>
+
+    <picker-view-column class="column">
+      <view wx:for="{{months}}">{{item}}月</view>
+    </picker-view-column> 
+  </picker-view>
+  <picker-view class="picker" style="{{ layerSelectArr[2].style }}" indicator-class="indicator" value="{{value}}" bindchange="bindChangeWeek">
+    <picker-view-column class="column">
+      <view wx:for="{{ weeks }}">{{item}}</view>
+    </picker-view-column>
+  </picker-view>
+  </view>
+</view>

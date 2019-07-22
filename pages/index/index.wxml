@@ -1,0 +1,106 @@
+<!--pages/index/index.wxml-->
+<view>
+  <view class='page-container'>
+    <view class='section-left {{ section.left? "section-active" : "section-normal" }}'>
+      <view class='ports'>
+      <view wx:for="{{ ports }}" class="port-container" data-index='{{ item.index }}' bindtap='switchPort'>
+          <view class='port-left {{ item.active? "port-active" : "port-normal" }}'></view>
+          <view class="port-right">
+            <text class="port-index">端口{{ item.index }}</text>
+            <text class="port-status">状态：{{item.status}}</text>
+          </view>
+        </view>
+      </view>     
+      <view class="add-container" bindtap='openAddPort'>
+        <image class="add-port" src='../../images/icons/add_port.png'></image>
+        <text>增加端口</text>
+      </view>
+      <view class='panel-arrow' bindtap='switchPanel'>
+        <view>{{ section.direction }}</view>
+      </view>
+    </view>
+    <view class='section-right'>
+      <view class="info-container">
+        <view class='info-top'>
+          <text>端口{{ currentPort }}</text>
+          <view class="power-container {{power.active? 'power-bg-active' : 'power-bg-normal'}}" bindtap='switchPower'>
+            <view class="{{power.active? 'power-active' : 'power-normal'}}"></view>
+          </view>
+        </view>
+        <view class='info-bottom'>
+          <text class='port-name'>{{ currentName }}</text>
+          <text class='set-up' bindtap='toPortOption'>设置参数</text>
+        </view>
+      </view>
+      <view class='data-container'>
+        <view class='data-top'>
+          <text>数据查询</text>
+          <view class='search-container'>
+            <view bindtap='changeMode'>{{ getData.modeName[getData.mode] }}</view>
+            <view bindtap='changeMethod'>{{ getData.timeMode[getData.mode][getData.method] }}</view>
+            <view bindtap='showSelect'>{{ getData.time }}</view>
+          </view>
+        </view>
+        <view class='data-bottom' style="display: {{ isChoice ? 'none' : 'block' }}">
+          <ec-canvas id="powerEchart" canvas-id="mychart" ec="{{ powerEc }}"></ec-canvas>
+        </view>
+      </view>
+    </view>
+    <view class='account-set' bindtap='toUserOption'>
+      <image src='../../images/icons/account.png'></image>
+      <text>账号设置</text>
+    </view>
+  </view>
+</view>
+
+<view class='add-layer {{ addPort.active? "layer-active" : "layer-normal" }}'>
+  <view>
+    <text>请输入插口的ID号</text>
+    <view>
+      <input bindinput='inputUID'></input>
+    </view>
+    <view class='add-button-container'>
+      <button bindtap='addPortBtn' data-mode="0">取消</button>
+      <button bindtap='addPortBtn' data-mode="1">确定</button>
+    </view>
+  </view>
+</view>
+
+<!-- 选择框浮出层 -->
+<view class='picker-layer-container {{ getData.choiceLayer? "layer-active" : "layer-normal" }}'>
+  <view class='choice-area'>
+  <view class='button-container' bindtap="selectButton">
+    <text class="layer-button button-left" data-id="cancel">取消</text>
+    <text class="layer-button button-right" data-id="comfirm">确定</text>
+  </view>
+  <picker-view class="picker {{ getData.timeSelect[0].active? 'layer-active' : 'layer-normal' }}" indicator-class="indicator" value="{{ getData.initValue }}" bindchange="bindChangeDate">
+    <picker-view-column class="column">
+      <view wx:for="{{getData.timeSelect[0].years}}">{{item}}年</view>
+    </picker-view-column>
+
+    <picker-view-column class="column">
+      <view wx:for="{{getData.timeSelect[0].months}}">{{item}}月</view>
+    </picker-view-column>
+
+    <picker-view-column class="column">
+      <view wx:for="{{getData.timeSelect[0].days}}">{{item}}日</view>
+    </picker-view-column>
+    
+  </picker-view>
+  <!-- 选择月份 -->
+  <picker-view class="picker {{ getData.timeSelect[1].active? 'layer-active' : 'layer-normal' }}" indicator-class="indicator" value="{{getData.initValue}}" bindchange="bindChangeMonth">
+    <picker-view-column class="column">
+      <view wx:for="{{ getData.timeSelect[1].years }}">{{item}}年</view>
+    </picker-view-column>
+
+    <picker-view-column class="column">
+      <view wx:for="{{getData.timeSelect[1].months}}">{{item}}月</view>
+    </picker-view-column> 
+  </picker-view>
+  <picker-view class="picker {{ getData.timeSelect[2].active? 'layer-active' : 'layer-normal' }}" indicator-class="indicator" value="0" bindchange="bindChangeWeek">
+    <picker-view-column class="column">
+      <view wx:for="{{ getData.timeSelect[2].weeks }}">{{item}}</view>
+    </picker-view-column>
+  </picker-view>
+  </view>
+</view>

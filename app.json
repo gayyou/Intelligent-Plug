@@ -1,0 +1,34 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/index/index",
+    "pages/changeInfo/changeInfo",
+    "pages/log/log",
+    "pages/option/option"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#787878",
+    "selectedColor": "#2A2A2A",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "端口管理",
+        "iconPath": "images/icons/port_manage.png",
+        "selectedIconPath": "images/icons/port_manage.png"
+      },
+      {
+        "pagePath": "pages/log/log",
+        "text": "查看日志",
+        "iconPath": "images/icons/log.png",
+        "selectedIconPath": "images/icons/log.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

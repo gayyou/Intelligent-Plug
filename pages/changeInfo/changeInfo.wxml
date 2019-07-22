@@ -1,0 +1,31 @@
+<!--pages/changeInfo/changeInfo.wxml-->
+<view class='page-container'>
+  <view class='change-container'>
+    <view class='head-contianer'>
+      <view></view>
+      <text>用户信息</text>
+      <view class='button-container' bindtap='changeSubmit'>
+        <text data-button='0'>取消</text>
+        <text data-button='1'>保存</text>
+      </view>
+    </view>
+    <view class='input-container'>
+      <text>用户昵称</text>
+      <input maxlength='10'></input>
+    </view>
+    <view class='head-contianer second-head'>
+      <view></view>
+      <text>修改密码</text>
+    </view>
+    <view class='input-container'>
+      <text>旧密码</text>
+      <input maxlength='18' password='{{ !password.oldIsShow }}'></input>
+      <image src='{{ password.oldIsShow? show : hidden }}' data-id='1' bindtap='switchPasswordMode'></image>
+    </view>
+    <view class='input-container'>
+      <text>新密码</text>
+      <input maxlength='18' password='{{ !password.newIsShow }}'></input>
+      <image src='{{ password.newIsShow? show : hidden }}' data-id='2' bindtap='switchPasswordMode'></image>
+    </view>
+  </view>
+</view>

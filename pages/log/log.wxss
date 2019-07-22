@@ -1,0 +1,97 @@
+/* pages/log/log.wxss */
+page {
+  margin: 0;
+  padding: 0;
+  background:rgba(250,250,250,1);
+}
+view {
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  display: block;
+  width:160rpx;
+  height:40rpx;
+  margin-top: 36rpx;
+  margin-left: 42rpx;
+  font-size:40rpx;
+  font-family:PingFangSC-Semibold;
+  font-weight:600;
+  color:rgba(42,42,42,1);
+  line-height:40rpx;
+}
+.head-container {
+  width: 100%;
+  margin-top: 46rpx;
+}
+.head-container::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+.head-container>text {
+  display: block;
+  float: left;
+  width:144rpx;
+  height:36rpx;
+  font-size:36rpx;
+  font-family:PingFangHK-Medium;
+  font-weight:500;
+  color:rgba(42,42,42,1);
+  line-height:36rpx;
+}
+.head-container>text:nth-child(1) {
+  margin-left: 42rpx;
+}
+.head-container>text:nth-child(2) {
+  margin-left: 46rpx;
+}
+.head-container>text:nth-child(3) {
+  margin-left: 92rpx;
+}
+.line {
+  margin-top: 36rpx;
+  width: 100%;
+  border-bottom: 1px solid #D4D4D4;
+  margin-bottom: 36rpx;
+}
+.time-container>text {
+  display: block;
+  width:180rpx;
+  /* height:60rpx; */
+  font-size:30rpx;
+  font-family:PingFangHK-Regular;
+  font-weight:400;
+  color:rgba(42,42,42,1);
+  /* line-height:30rpx; */
+}
+.time-container {
+  margin-left: 46rpx;
+  width: 160rpx;
+}
+.info-container>text:nth-child(1) {
+  margin-left: 42rpx;
+  width: 144rpx;
+}
+.info-container>text:nth-child(3) {
+  margin-left: 78rpx;
+  width: 240rpx;
+}
+.time-container::after, .info-container::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+.info-container {
+  width: 100%;
+  margin-bottom: 54rpx;
+}
+.info-container>text {
+  display: block;
+  float: left;
+  font-size: 28rpx;
+}
+.info-container>view {
+  float: left;
+}

@@ -1,0 +1,31 @@
+<!--pages/option/option.wxml-->
+<view class='page-container'>
+  <view class='change-container'>
+    <view class='head-contianer'>
+      <view></view>
+      <text>参数设置</text>
+      <view class='button-container' bindtap='changeSubmit'>
+        <text data-button='0'>取消</text>
+        <text data-button='1'>保存</text>
+      </view>
+    </view>
+    <view class='input-container'>
+      <text>设备名称</text>
+      <input maxlength='10' class='option-input' value='{{port.name}}'  data-name="name" 
+      bindinput='optionInput'></input>
+    </view>
+    <view class='input-container'>
+      <text>设备工作功率</text>
+      <input maxlength='18' value='{{port.workPower}}' data-name="workPower" bindinput='optionInput'></input>
+    </view>
+    <view class='input-container'>
+      <text>设备待机功率</text>
+      <input maxlength='18' value='{{port.standbyPower}}' data-name="standbyPower" bindinput='optionInput'></input>
+    </view>
+    <view class='input-container'>
+      <text>在长时间待机时候自动关闭</text>
+      <view class='option-switch' bindtap='autoClose'><view class='{{port.autoStatus? "power-active" : "power-normal"}}'></view></view>
+    </view>
+    <button class='delete-button' bindtap='deletePort'>删除该设备</button>
+  </view>
+</view>

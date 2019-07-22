@@ -1,0 +1,118 @@
+/* pages/changeInfo/changeInfo.wxss */
+page {
+  margin: 0;
+  padding: 0;
+  background:rgba(250,250,250,1);
+}
+view {
+  margin: 0;
+  padding: 0;
+}
+.page-container {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.change-container {
+  position: relative;
+  width: 592rpx;
+  height: 546rpx;
+  margin: 144rpx auto;
+  background-color: #fff;
+}
+.head-contianer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.head-contianer::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.head-contianer>view {
+  width: 8rpx;
+  height: 34rpx;
+}
+.head-contianer>text {
+  display: block;
+  float: left;
+  margin-top: 34rpx;
+  margin-left: 40rpx;
+  width:160rpx;
+  height:40rpx;
+  font-size:40rpx;
+  font-family:PingFangHK-Medium;
+  font-weight:500;
+  color:rgba(42,42,42,1);
+  line-height:40rpx;
+}
+.button-container {
+  float: right;
+  margin-right: 24rpx;
+  width: 138rpx!important;
+  height: 26rpx!important;
+}
+.button-container>text {
+  float: left;
+  display: block;
+  margin-top: 40rpx;
+  width:56rpx;
+  height:28rpx;
+  font-size:28rpx;
+  font-family:PingFangHK-Medium;
+  font-weight:500;
+  color:rgba(42,42,42,1);
+  line-height:28rpx;
+}
+.button-container>text:nth-child(1) {
+  margin-right: 26rpx;
+}
+.head-contianer>view:nth-child(1) {
+  float: left;
+  width: 8rpx;
+  height: 34rpx;
+  margin-top: 36rpx;
+  background-color: rgba(6,24,87,1);
+}
+.input-container {
+  display: flex;
+  float: right;
+  justify-content: center;
+  align-items: center;
+  width: 546rpx;
+  height: 104rpx;
+  border-bottom: 1px solid #2A2A2A;
+}
+.input-container>text {
+  display: block;
+  float: left;
+  width:112rpx;
+  height:28rpx;
+  font-size:28rpx;
+  font-family:PingFangHK-Medium;
+  font-weight:500;
+  color:rgba(42,42,42,1);
+  line-height:28rpx;
+}
+.input-container>input {
+  display: block;
+  float: left;
+  width: 386rpx;
+  margin-left: 48rpx;
+  font-size:28rpx;
+  font-family:PingFangHK-Medium;
+  font-weight:500;
+  color:rgba(42,42,42,1);
+  line-height:28rpx;
+}
+.second-head {
+  margin-top: 140rpx!important;
+}
+.input-container>image {
+  width:56rpx;
+  height:36rpx;
+  margin-right: 40rpx;
+}

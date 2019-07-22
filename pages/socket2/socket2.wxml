@@ -1,0 +1,4 @@
+<!--pages/socket2/socket2.wxml-->
+<!-- <text>pages/socket2/socket2.wxml</text> -->
+<include src="../pageIndex/pageIndex.wxml"/>
+
