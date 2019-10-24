@@ -1,0 +1,68 @@
+<view class="page-container">
+  <view class="list"
+    wx:for="{{ taskList }}"
+    data-index="{{ index }}"
+    bindtap="choiceTask"
+  >
+    <view class="section-left">
+      <view class="time-container">
+        <text class="time">{{ item.time }}</text>
+      </view>
+      <view class="info-container">
+        <view class="port">端口 {{ item.port }}</view>
+        <view class="info">{{ item.info }}</view>
+      </view>
+    </view>
+    <view class="section-right" data-index="{{index}}" catchtap="switchAutoClose">
+      <!-- <view class="power-container {{item.active? 'power-bg-active' : 'power-bg-normal'}}">
+        <view class="{{item.active? 'power-active' : 'power-normal'}}"></view>
+      </view> -->
+    </view>
+  </view>
+  <view class='account-set' bindtap="addTask">
+    <image src='../../images/icons/add_task.png'></image>
+    <text>添加任务</text>
+  </view>
+
+  <!-- 下面是浮出层 -->
+  <view class="layer"
+    wx:if="{{isShow}}"
+  >
+    <view class='change-container'>
+      <view class='head-contianer'>
+        <view></view>
+        <text>定时任务</text>
+        <view class='button-container' bindtap='changeSubmit'>
+          <text data-button='0'>取消</text>
+          <text data-button='1'>保存</text>
+        </view>
+      </view>
+      <view class='input-container'>
+        <text style="margin-right: 45rpx">时间</text>
+        <picker class="time-choice" mode="time" value="{{display.time}}" start="00:00" end="23:59" bindchange="changeTime">
+          <view>{{ display.time }}</view>
+        </picker>
+      </view>
+      <view class='input-container'>
+        <text>排插端口</text>
+        <picker  class="time-choice" bindchange="bindPickerChange" value="端口 {{display.port}}" range="{{portArr}}" bindchange="changePort">
+          <view>端口 {{display.port}}</view>
+        </picker>
+      </view>
+      <!-- <view class='input-container'>
+        <text>设备工作功率</text>
+        <input maxlength='18' value='{{port.workPower}}' data-name="workPower" bindinput='optionInput'></input>
+      </view> -->
+      <!-- <view class='input-container'>
+        <text>设备待机功率</text>
+        <input maxlength='18' value='{{port.standbyPower}}' data-name="standbyPower" bindinput='optionInput'></input>
+      </view> -->
+      <view class='auto-container'>
+        <text>选择端口状态</text>
+        <view class='option-switch {{display.active? "power-bg-active" : "power-bg-normal"}}' bindtap='autoClose'
+        ><view class='{{display.active? "power-active" : "power-normal"}}'></view></view>
+      </view>
+      <button class='delete-button' bindtap='deletePort'>删除端口</button>
+    </view>
+  </view>
+</view>

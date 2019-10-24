@@ -23,15 +23,16 @@ Page({
   onLoad: function (options) {
     this.setData({
       'port.index': options.index,
+      'port.name': options.name
     })
-    this.initPage(options.index)
+    this.initPage(options.index, options.name)
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.initPage();
+    this.initPage(this.data.port.index, this.data.port.name);
   },
 
   /**
@@ -119,33 +120,46 @@ Page({
         url: '../index/index',
       })
     } else if (button == 1) {
-      let jsonObj = {
-        index: port.index,
-        deviceInfo: {
-          deviceIndex: port.index,
-          deviceWorkPower: port.workPower,
-          deviceStandbyPower: port.standbyPower,
-          autoClose: port.autoStatus ? 1 : 0,
-        },
-      },
-      postReq = new infoUtil.PostRequest('/actiondevice/updatedeviceinfo', jsonObj);
-      postReq.sendRequest((res) => {
-        switch (res.data.status) {
-          case '2000': {
-            wx.showToast({
-              title: '修改成功',
-            });
-            setTimeout(() => {
-              wx.switchTab({
-                url: '../index/index',
-              })
-            }, 1000);
-            break;
-          }
-        }
-      }, (error) => {
-
+      let nameObj = {
+        index: parseInt(port.index),
+        name: port.name
+      };
+      let postReqName = new infoUtil.PostRequest('/actiondevice/updatedevicename', nameObj);
+      postReqName.sendRequest((res) => {
+        wx.showToast({
+          title: '修改成功',
+        });
+        wx.switchTab({
+          url: '../index/index',
+        })
       })
+      // let jsonObj = {
+      //   index: port.index,
+      //   deviceInfo: {
+      //     deviceIndex: parseInt(port.index),
+      //     deviceWorkPower: parseFloat(port.workPower),
+      //     deviceStandbyPower: parseFloat(port.standbyPower),
+      //     autoClose: port.autoStatus ? 1 : 0,
+      //   },
+      // },
+      // postReq = new infoUtil.PostRequest('/actiondevice/updatedeviceinfo', jsonObj);
+      // postReq.sendRequest((res) => {
+      //   switch (res.data.status) {
+      //     case '2000': {
+      //       wx.showToast({
+      //         title: '修改成功',
+      //       });
+      //       setTimeout(() => {
+      //         wx.switchTab({
+      //           url: '../index/index',
+      //         })
+      //       }, 1000);
+      //       break;
+      //     }
+      //   }
+      // }, (error) => {
+
+      // })
     }
   },
   deletePort() {
@@ -188,6 +202,7 @@ Page({
     })
   },
   initPage(index, name) {
+    console.log(index)
     let jsonObj = {
           index: parseInt(index),
         },
@@ -199,8 +214,8 @@ Page({
           let data = res.data.data.deviceInfo;
           that.setData({
             'port.name': name,
-            'port.workPower': data.deviceWorkPower,
-            'port.standbyPower': data.deviceStandbyPower,
+            // 'port.workPower': data.deviceWorkPower,
+            // 'port.standbyPower': data.deviceStandbyPower,
             'port.autoStatus': data.autoClose == 1 ? true : false,
           });
           break;

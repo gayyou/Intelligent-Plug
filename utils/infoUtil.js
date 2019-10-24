@@ -42,7 +42,7 @@ class Request {
     if (app.sessionID.length != 0) {
       header = { 'x-auth-token': app.sessionID };
     } else {
-      // header = { 'x-auth-token': ''};
+      
     }
     wx.request({
       url: that.baseUrl + that.url,
@@ -105,19 +105,29 @@ class Socket {
           })
           that.socketTask.onMessage((res) => {
             res = JSON.parse(res.data);
-            if (res.data.status == 2 || res.data.status == 1) {
-              if (other.data.power.active == false) {
-                other.setData({
-                  'power.active': true,
-                })
-              }
-            }
-            if (res.data.status == 0 || res.data.status == 3) {
-              if (other.data.power.active == true) {
-                other.setData({
-                  'power.active': false,
-                })
-              }
+            console.log(res)
+            // if (res.data.status == 2 || res.data.status == 1) {
+            //   if (other.data.power.active == false) {
+            //     other.setData({
+            //       'power.active': true,
+            //     })
+            //   }
+            // }
+            // if (res.data.status == 0 || res.data.status == 3) {
+            //   if (other.data.power.active == true) {
+            //     other.setData({
+            //       'power.active': false,
+            //     })
+            //   }
+            // }
+            if (res.data.device.stop == 1) {
+              other.setData({
+                'power.active': true
+              })
+            } else {
+              other.setData({
+                'power.active': false
+              })
             }
 
             let keys = Object.keys(res.data.deviceStatus);
@@ -154,6 +164,16 @@ class Socket {
             if (that.isCallback == true) {
               fn.call(other, res);
             }
+
+            for (let i = 0; i < other.data.ports.length; i++) {
+              if (other.data.ports[i].index == res.data.device.index) {
+                other.data.ports[i].name = res.data.device.name
+                other.setData({
+                  ports: other.data.ports,
+                  currentName: other.data.ports[i].name
+                })
+              }
+            }
           });
         }, 0)
         
@@ -186,15 +206,15 @@ class Socket {
   }
 
   closeSocket() {
-    if (this.isOpen == false) {
-      // 还没开启
-      return ;
-    }
-    // wx.closeSocket({
-    //   success: function () {
-    //     console.log('socket已经关闭')
-    //   }
-    // })
+    // if (this.isOpen == false) {
+    //   // 还没开启
+    //   return ;
+    // }
+    wx.closeSocket({
+      success: function () {
+        console.log('socket已经关闭')
+      }
+    })
   }
 
   onMessageReady(that, fn) {

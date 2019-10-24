@@ -8,11 +8,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    portIndex: -1,
     logs: [
       {
-        deviceName: '打印机',
-        deviceTime: ['2018-10-18', '20:22:30'],
-        deviceReason: '长得壮的撒噶啥',
+        // deviceName: '打印机',
+        // deviceTime: ['2018-10-18', '20:22:30'],
+        // deviceReason: '长得壮的撒噶啥',
       },
     ],
     portArr: [],
@@ -23,6 +24,9 @@ Page({
    */
   onLoad: function (options) {
 
+    // this.setData({
+    //   portIndex: parseInt(options.index)
+    // })
   },
 
   /**
@@ -30,13 +34,27 @@ Page({
    */
   onReady: function () {
 
+    // let jsonObj = {
+    //   index: app.currentPort
+    // }
+    // postReq = new infoUtil.PostRequest('/actiondevice/querydevicelog', jsonObj);
+    // postReq.sendRequest((res) => {
+    //   switch (res.data.status) {
+    //     case 2000: {
+    //       this.setData({
+    //         logs: res.data.deviceLogList
+    //       })
+    //       break;
+    //     }
+    //   }
+    // })
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.pageInit();
   },
 
   /**
@@ -74,6 +92,8 @@ Page({
 
   },
   pageInit() {
+    const that = this;
+    console.log("123")
     if (app.currentPort == null) {
       return ;
     }
@@ -85,12 +105,22 @@ Page({
     this.data.portArr = app.portArr;
     let infoArr = [];
     postReq.sendRequest((res) => {
-      if (res.status == 2000) {
-        for (let item in res.data.data.deviceLogList) {
-          let timeArr = item.deviceTime.split(' ');
-          item.deviceTime = timeArr
-          infoArr.push(item)
+      if (res.data.status == 2000) {
+        let list = res.data.data.deviceLogList;
+        for (let i = 0; i < list.length; i++) {
+          let timeArr = list[i].deviceTime.split(' ');
+          let name = list[i].deviceName;
+          let reason = list[i].deviceReason;
+          infoArr.push({
+            deviceName: name,
+            deviceTime: timeArr,
+            deviceReason: reason,
+          })
         }
+
+        that.setData({
+          logs: infoArr
+        })
       }
     })
     

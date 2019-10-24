@@ -49,7 +49,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    const that = this;
+    wx.getStorage({
+      key: 'account',
+      success: function(res) {
+        that.setData({
+          'login.passwordMode.account': res.data,
+          'login.phoneMode.account': res.data
+        });
+      },
+    });
+    wx.getStorage({
+      key: 'password',
+      success: function (res) {
+        that.setData({
+          'login.passwordMode.password': res.data,
+        });
+      },
+    });
   },
 
   /**
@@ -214,6 +231,11 @@ Page({
           // });
 
           app.sessionID = res.header['x-auth-token'];
+
+          wx.setStorage({
+            key: 'account',
+            data: data.account,
+          })
           
           wx.switchTab({
             url: '../index/index'
@@ -261,6 +283,16 @@ Page({
           //   data: res.header['Set-Cookie'],
           // });
           app.sessionID = res.header['x-auth-token'];
+
+          wx.setStorage({
+            key: 'account',
+            data: data.account,
+          })
+          wx.setStorage({
+            key: 'password',
+            data: data.password,
+          })
+
           wx.switchTab({
             url: '../index/index'
           })
@@ -486,4 +518,64 @@ Page({
       }
     }
   },
+  touristMode() {
+    let data = this.data.login.passwordMode;
+    let jsonObj = {
+      user: {
+        userPhone: "13570200438",
+        userPassword: "11111111"
+      },
+      checkCodeKey: ""
+    };
+    let postReq = new infoUtil.PostRequest('/user/loginnormal', jsonObj, true);
+    postReq.sendRequest((res) => {
+      switch (res.data.status) {
+        case '2000': {
+          // wx.setStorage({
+          //   key: 'cookie',
+          //   data: res.header['Set-Cookie'],
+          // });
+          app.sessionID = res.header['x-auth-token'];
+
+          wx.setStorage({
+            key: 'account',
+            data: data.account,
+          })
+          wx.setStorage({
+            key: 'password',
+            data: data.password,
+          })
+
+          wx.switchTab({
+            url: '../index/index'
+          })
+          break;
+        }
+        case '4022': {
+          wx.showModal({
+            content: '密码错误',
+            showCancel: false,
+          })
+          break;
+        }
+
+        case '4023': {
+          wx.showModal({
+            content: '账号未注册',
+            showCancel: false
+          })
+          break;
+        }
+        default: {
+          wx.showModal({
+            content: '请检查账号或者密码',
+            showCancel: false
+          })
+          break;
+        }
+      }
+    }, () => {
+
+    });
+  }
 })

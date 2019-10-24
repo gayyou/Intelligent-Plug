@@ -13,7 +13,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.3.0",
 	"appid": "wx36ebe3437b0541e1",
-	"projectname": "%E8%8A%82%E8%83%BD%E5%B0%8F%E5%B8%AE%E6%89%8B",
+	"projectname": "Intelligent-Plug",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
@@ -38,7 +38,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 6,
 			"list": [
 				{
 					"id": -1,
@@ -73,7 +73,14 @@
 				{
 					"id": -1,
 					"name": "设置页面",
-					"pathName": "pages/option/option"
+					"pathName": "pages/option/option",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "pages/timeTask/timeTask",
+					"pathName": "pages/timeTask/timeTask",
+					"scene": null
 				}
 			]
 		}

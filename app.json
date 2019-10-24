@@ -4,7 +4,8 @@
     "pages/index/index",
     "pages/changeInfo/changeInfo",
     "pages/log/log",
-    "pages/option/option"
+    "pages/option/option",
+    "pages/timeTask/timeTask"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -27,6 +28,12 @@
         "text": "查看日志",
         "iconPath": "images/icons/log.png",
         "selectedIconPath": "images/icons/log.png"
+      },
+      {
+        "pagePath": "pages/timeTask/timeTask",
+        "text": "定时开关",
+        "iconPath": "images/icons/icon_task_2.png",
+        "selectedIconPath": "images/icons/icon_task_1.png"
       }
     ]
   },

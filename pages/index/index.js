@@ -115,14 +115,26 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    if (!this.data.socket) return ;
+    let socket = new infoUtil.Socket('/message');
+    // socket.onMessageReady(this, Utils.realDataHandle);
+    
+    socket.connectSocket({
+      index: parseInt(this.data.currentPort)
+    }, this, Utils.realDataHandle);
+    this.setData({
+      socket
+    });
+    if (this.data.getData.mode != 1) {
+      socket.cancelCallback();
+    }
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.data.socket.closeSocket();
   },
 
   /**
@@ -233,7 +245,6 @@ Page({
               console.log(res);
               switch(res.data.status) {
                 case '2000': {
-                  console.log('开启用电器')
                   wx.showToast({
                     title: '正在开启用电器...',
                   })
@@ -287,6 +298,7 @@ Page({
     console.log(this.data)
     switch(this.data.currentMode) {
       case 1: {
+        // 实时更新
         this.searchData(1)
         break;
       }
@@ -333,7 +345,7 @@ Page({
   },
   toPortOption() {
     wx.navigateTo({
-      url: '../option/option?index=' + this.data.currentPort,
+      url: '../option/option?index=' + this.data.currentPort + '&name=' + this.data.currentName,
       success(res) {
         console.log(res);
       },
@@ -586,7 +598,6 @@ Page({
             break;
           }
           case 2: {
-            console.log('预测未来')
             this.setData({
               'getData.time': '',
               currentChart: Utils.powerEchartInit,
@@ -625,10 +636,11 @@ Page({
             
             for (let item in res.data.data.user.indexPrivilegeMap) {
               portArr.push({
-                status: '开启',
+                status: '未知',
                 active: true,
-                name: '洗衣机',
-                index: item
+                name: '',
+                index: item,
+                
               })
             }
 
@@ -645,18 +657,24 @@ Page({
             break;
           }
         }
+        this.setData({
+          'addPort.active': false,
+          isChoice: false
+        })
       }, () => {
 
       });
     } else {
       this.setData({
-        'addPort.active': false
+        'addPort.active': false,
+        isChoice: false
       })
     }
   },
   openAddPort() {
     this.setData({
-      'addPort.active': true
+      'addPort.active': true,
+      isChoice: true
     })
   },
   inputUID(event) {
@@ -677,26 +695,10 @@ Page({
           let portArr = res.data.data.user.indexPrivilegeMap,
               i;
           let arr = [];
-        
           for (let item in portArr) {
             isHaveDev = true;
             let name = ''
-            switch(item) {
-              case '1': {
-                name = '手机充电器'
-                break;
-              }
-
-              case '2': {
-                name = '饮水机'
-                break;
-              }
-
-              case '3': {
-                name = '打印机'
-                break;
-              }
-            }
+            // name = res.data.data.device.name;
             arr.push({
               status: '未知',
               active: false,
@@ -715,12 +717,14 @@ Page({
                 currentName: newPorts[0].name,
                 ports: newPorts
               })
+              app.currentPort = newPorts[0].index;
             }, 1)
           }
 
           this.setData({
             ports: arr
           })
+        
           // for (i = 0; i < portArr.length; i++) {
           //   this.data.ports.push(new infoUtil.Port(portArr[i]));
           // }
@@ -881,10 +885,14 @@ Page({
         postReq = new infoUtil.PostRequest('/predicted/nowpowersum', jsonObj);
         postReq.sendRequest((res) => {
           switch(res.data.status) {
-            case 2000: {
-              console.log(res.data.data);
+            case '2000': {
+              console.log(123, res.data.data);
+              
               // 预测数据
-              Utils.predictDataRenew(res.data.data);
+              let data = {};
+              data.powerSumList = [res.data.data.powerSum]
+              Utils.powerDateRenew(data)
+              // Utils.predictDataRenew(res.data.data);
               break;
             }
           }

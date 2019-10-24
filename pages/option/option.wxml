@@ -14,14 +14,14 @@
       <input maxlength='10' class='option-input' value='{{port.name}}'  data-name="name" 
       bindinput='optionInput'></input>
     </view>
-    <view class='input-container'>
+    <!-- <view class='input-container'>
       <text>设备工作功率</text>
       <input maxlength='18' value='{{port.workPower}}' data-name="workPower" bindinput='optionInput'></input>
-    </view>
-    <view class='input-container'>
+    </view> -->
+    <!-- <view class='input-container'>
       <text>设备待机功率</text>
       <input maxlength='18' value='{{port.standbyPower}}' data-name="standbyPower" bindinput='optionInput'></input>
-    </view>
+    </view> -->
     <view class='input-container'>
       <text>在长时间待机时候自动关闭</text>
       <view class='option-switch' bindtap='autoClose'><view class='{{port.autoStatus? "power-active" : "power-normal"}}'></view></view>
